@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h2>llj的网站</h2>
+	<script type="text/javascript">
+		let xhr = new XMLHttpRequest()
+		xhr.open('GET','http://llz.com/llz_private')
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState ==== 4){
+				console.log(xhr.responseText)
+			}
+		}
+		xhr.send()
+	</script>
+</body>
+</html>
