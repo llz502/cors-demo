@@ -12,24 +12,27 @@ var server = http.createServer(function(request, response){
   var query = temp.query
   var method = request.method
 
-  //从这里开始看，上面不要看
 
-  if(path === '/'){  // 如果用户请求的是 / 路径
-    var string = fs.readFileSync('./index.html', 'utf8')  
-    response.setHeader('Content-Type', 'text/html;charset=utf-8')  
-    response.end(string)   
-  }else if(path === '/llz'){  // 如果用户请求的是 / 路径
+  if(path === '/'){   
     var string = fs.readFileSync('./llz.html', 'utf8')  
     response.setHeader('Content-Type', 'text/html;charset=utf-8')  
     response.end(string)   
-  }else  if(path === '/llj'){  // 如果用户请求的是 / 路径
+  }else if(path === '/llz'){   
+    var string = fs.readFileSync('./llz.html', 'utf8')  
+    response.setHeader('Content-Type', 'text/html;charset=utf-8')  
+    response.end(string)   
+  }else  if(path === '/llj'){   
     var string = fs.readFileSync('./llj.html', 'utf8')  
     response.setHeader('Content-Type', 'text/html;charset=utf-8')  
     response.end(string)   
-  }else  if(path === '/llz_private'){  // 如果用户请求的是 / 路径
+  }else  if(path === '/llz_private'){   
     var string = fs.readFileSync('./llz_private.json')  
     response.setHeader('Access-Control-Allow-Origin','http://llj.com')
+    //在http://llj.com/llj的网址里向和它不同的域名http://llz.com/llz_private发出请求，
+    //属于跨域，要在服务端添加上面一行代码
     response.setHeader('Access-Control-Allow-Methods','POST, GET, OPTIONS, PATCH, DELETE, HEAD')
+    //当发出GET、POST之外方式的请求时，（一般是第二次请求，第一次是GET请求）
+    //要在服务器上添加上面一行代码
     response.setHeader('Content-Type', 'application.json')  
     response.end(string)   
   }else  if(path === '/style.css'){   
@@ -46,9 +49,8 @@ var server = http.createServer(function(request, response){
     response.end('找不到对应的路径，你需要自行修改 index.js')
   }
 
-  // 代码结束，下面不要看
   console.log(method + ' ' + request.url)
 })
 
 server.listen(port)
-console.log('监听 ' + port + ' 成功，请用在空中转体720度然后用电饭煲打开 http://localhost:' + port)
+console.log('监听 ' + port + ' 成功，请用在空中转体720度然后用电饭煲打开 http://llz.com:' + port)
